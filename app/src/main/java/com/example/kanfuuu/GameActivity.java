@@ -30,7 +30,7 @@ public class GameActivity extends AppCompatActivity {
     public static Intent newIntent(Context context){
         return new Intent(context, GameActivity.class);
     }
-    private View shampooHp;
+    private ImageView shampooHp;
     private TextView timerText;
     private ImageView shampoo;
     private View actionPunch;
@@ -76,10 +76,25 @@ public class GameActivity extends AppCompatActivity {
                 }
 
                 //10回hpを減らす最後のHPで Result 画面に遷移
-                if (count > 10 && count % 10 == 0) {
+                if (count >= 10 && count < 20) {
                     shampooHp.setImageResource(R.drawable.hp_1);
+                } else if (count >= 20 && count < 30) {
+                    shampooHp.setImageResource(R.drawable.hp_2);
+                } else if (count >= 30 && count < 40) {
+                    shampooHp.setImageResource(R.drawable.hp_3);
+                } else if (count >= 40 && count < 50) {
+                    shampooHp.setImageResource(R.drawable.hp_4);
+                } else if (count >= 50 && count < 60) {
+                    shampooHp.setImageResource(R.drawable.hp_5);
+                } else if (count >= 60 && count < 70) {
+                    shampooHp.setImageResource(R.drawable.hp_6);
+                } else if (count >= 70 && count < 80) {
+                    shampooHp.setImageResource(R.drawable.hp_7);
+                } else if (count >= 80 && count < 90) {
+                    shampooHp.setImageResource(R.drawable.hp_8);
+                } else if (count >= 90 && count < 100) {
                     Intent intent = Result
-                            .newIntent(Result.this, count);
+                            .newIntent(GameActivity.this, count);
                     startActivity(intent);
                 }
             }
@@ -94,6 +109,11 @@ public class GameActivity extends AppCompatActivity {
         timer.cancel();
         timer = null;
     }
+
+    private ImageView people;
+    private ImageView gameclear;
+    private ImageView stageclear;
+    private ImageView gameover;
 
     private void initTimer(){
         timerText.setText(String.valueOf(DEFAULT_TIMER_VALUE));
@@ -110,6 +130,18 @@ public class GameActivity extends AppCompatActivity {
                 Intent intent = Result
                         .newIntent(GameActivity.this, count);
                 startActivity(intent);
+
+                people = findViewById(R.id.people);
+                gameclear = findViewById(R.id.gameclear);
+                stageclear = findViewById(R.id.stageclear);
+                gameover = findViewById(R.id.gameover);
+
+                if (count < 100){
+                    people.setVisibility(View.GONE);
+                    gameclear.setVisibility(View.GONE);
+                    stageclear.setVisibility(View.GONE);
+                    gameover.setVisibility(View.VISIBLE);
+                }
 
             }
         };

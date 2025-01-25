@@ -3,6 +3,8 @@ package com.example.kanfuuu;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,14 +12,15 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class Result extends AppCompatActivity {
+public class Result extends AppCompatActivity{
 
     private static final String KEY_COUNT = "key_count";
 
     public static Intent newIntent(Context context ,int count) {
-        Intent intent =  new Intent(context, Result.class);
+        Intent intent = new Intent(context, Result.class);
         intent.putExtra(KEY_COUNT, count);
         return intent;
+
     }
 
     @Override
@@ -29,6 +32,17 @@ public class Result extends AppCompatActivity {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
+        });
+
+        ImageView playBtn = findViewById(R.id.playbtn);
+
+        playBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = MainActivity.newIntent(Result.this);
+                startActivity(intent);
+
+            }
         });
     }
 }
