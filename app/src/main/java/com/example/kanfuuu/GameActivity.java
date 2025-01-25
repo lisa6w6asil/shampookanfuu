@@ -68,11 +68,19 @@ public class GameActivity extends AppCompatActivity {
                 if (count % 2 == 0) {
                     if (punchAnimatorSet.isRunning()) return;
                     punchAnimatorSet.start();
-                    shampoo.setImageResource(R.drawable.punch);
+                    shampoo.setImageResource(R.drawable.shampoo02);
                 } else {
                     if (kickAnimatorSet.isRunning()) return;
                     kickAnimatorSet.start();
-                    shampoo.setImageResource(R.drawable.kick);
+                    shampoo.setImageResource(R.drawable.shampoo01);
+                }
+
+                //10回hpを減らす最後のHPで Result 画面に遷移
+                if (count > 10 && count % 10 == 0) {
+                    shampooHp.setImageResource(R.drawable.hp_1);
+                    Intent intent = Result
+                            .newIntent(Result.this, count);
+                    startActivity(intent);
                 }
             }
         });
